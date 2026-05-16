@@ -47,6 +47,18 @@ body { position: relative; }
   transition: filter 0.8s ease;
 }
 
+/* 모바일 (세로 화면) — 가로 일러스트의 오른쪽 교회당이 보이도록 우측으로 이동 */
+@media (max-width: 768px), (orientation: portrait) {
+  .sky-bg {
+    background:
+      linear-gradient(180deg,
+        rgba(255, 245, 248, 0.22) 0%,
+        rgba(255, 229, 236, 0.32) 40%,
+        rgba(255, 194, 209, 0.55) 100%),
+      url('images/church-bg.png') 78% 40% / cover no-repeat;
+  }
+}
+
 /* 편지 씬: 배경 살짝 흐리게 (영상 직전까지만) */
 body.dim-bg .sky-bg {
   filter: brightness(0.55) blur(4px);
