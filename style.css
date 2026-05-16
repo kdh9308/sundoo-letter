@@ -1,0 +1,443 @@
+/* ============================================
+   선두교회 신혼부부회 ｜ 스승의 주일 편지
+   벚꽃 핑크 테마
+   ============================================ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink-50: #FFF0F5;
+  --pink-100: #FFE5EC;
+  --pink-200: #FFD1DC;
+  --pink-300: #FFC2D1;
+  --pink-400: #FFB3C6;
+  --pink-500: #FF8FA3;
+  --pink-600: #FB6F92;
+  --pink-700: #C9184A;
+  --cream: #FFF9F5;
+  --ink: #5B2A3A;
+  --ink-soft: #8B5A6B;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--pink-100);
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body { position: relative; }
+
+/* 배경 — 일러스트 교회 이미지 + 핑크 그라데이션 오버레이 */
+.sky-bg {
+  position: fixed;
+  inset: 0;
+  background:
+    /* 위 = 핑크 살짝 / 아래 = 진한 핑크로 텍스트 가독성 확보 */
+    linear-gradient(180deg,
+      rgba(255, 245, 248, 0.25) 0%,
+      rgba(255, 229, 236, 0.35) 40%,
+      rgba(255, 194, 209, 0.55) 100%),
+    url('images/church-bg.png') center 30% / cover no-repeat;
+  z-index: 0;
+  transition: filter 0.8s ease;
+}
+
+/* 편지 씬: 배경 살짝 흐리게 (영상 직전까지만) */
+body.dim-bg .sky-bg {
+  filter: brightness(0.55) blur(4px);
+}
+/* 영상 씬: GPU 부담 큰 blur 제거 → 영상 디코딩 우선 */
+body.video-playing .sky-bg {
+  filter: brightness(0.35);
+}
+/* 영상 씬: 꽃잎 애니메이션 정지 + 숨김 (렉 방지) */
+body.video-playing .petals {
+  display: none;
+}
+
+/* ── 떨어지는 벚꽃 꽃잎 ── */
+.petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.petal {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background-image:
+    radial-gradient(circle at 50% 40%, #FFD1DC 0%, #FFB3C6 60%, #FF8FA3 100%);
+  clip-path: path('M7 0 C 9 4, 13 4, 14 7 C 13 10, 9 10, 7 14 C 5 10, 1 10, 0 7 C 1 4, 5 4, 7 0 Z');
+  opacity: 0.85;
+  top: -20px;
+  animation: petalFall linear infinite;
+}
+@keyframes petalFall {
+  0%   { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.85; }
+  90%  { opacity: 0.85; }
+  100% { transform: translateY(110vh) translateX(var(--drift, 30px)) rotate(540deg); opacity: 0; }
+}
+
+/* ── 씬 공통 ── */
+.scene {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+.scene.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ====================================================
+   SCENE 1 : 환영 화면
+   ==================================================== */
+#scene-welcome {
+  justify-content: space-between;
+  padding-top: max(48px, env(safe-area-inset-top));
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
+}
+
+.welcome-text-top {
+  text-align: center;
+  padding: 24px 20px;
+  background: linear-gradient(180deg, rgba(255,249,245,0.85), rgba(255,249,245,0.65) 70%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 0 0 24px 24px;
+  animation: fadeInDown 1.2s ease 0.2s both;
+}
+.subtitle {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: var(--pink-700);
+  margin-bottom: 14px;
+  opacity: 0.9;
+  text-shadow: 0 1px 4px rgba(255,255,255,0.7);
+}
+.title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.55;
+  color: var(--ink);
+  text-shadow: 0 1px 4px rgba(255,255,255,0.6);
+}
+.title .highlight {
+  color: var(--pink-700);
+  font-weight: 800;
+  display: inline-block;
+  position: relative;
+}
+.title .highlight::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, var(--pink-300), transparent);
+  border-radius: 3px;
+  opacity: 0.6;
+}
+
+/* 교회 무대 — 배경 이미지가 교회를 이미 보여주므로 SVG 교회는 숨김 */
+.church-stage {
+  display: none;
+}
+/* SVG 일러스트 (백업용, 이미지 로드 실패 시 대비) */
+.church, .hill, .far-hills { display: none; }
+
+/* ── 편지 봉투 (viewport 전체에서 날아옴) ── */
+.airplane {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 100px;
+  margin: -50px 0 0 -60px;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 22px rgba(201, 24, 74, 0.4));
+  transform: translate(45vw, -45vh) scale(0.06) rotate(-25deg);
+  will-change: transform, opacity;
+}
+.airplane.flying-in {
+  animation: flyIn 2.8s cubic-bezier(0.33, 0.1, 0.25, 1) forwards;
+}
+.airplane.depart {
+  animation: none;
+  transform: translate(0, 0) scale(1.4) rotate(0deg);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+@keyframes flyIn {
+  0% {
+    transform: translate(50vw, -42vh) scale(0.04) rotate(-18deg);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(36vw, -30vh) scale(0.12) rotate(-8deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(14vw, -10vh) scale(0.42) rotate(6deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) scale(1.4) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* 탭 안내 */
+.tap-hint {
+  text-align: center;
+  padding: 16px 28px;
+  background: rgba(255, 249, 245, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 32px;
+  box-shadow: 0 8px 24px rgba(201, 24, 74, 0.18);
+  animation: fadeIn 1.2s ease 1.2s both, pulse 2s ease-in-out 2s infinite;
+}
+.tap-icon {
+  font-size: 32px;
+  margin-bottom: 6px;
+  animation: tapBounce 1.4s ease-in-out infinite;
+}
+.tap-hint p {
+  font-family: 'Gaegu', cursive;
+  font-size: 18px;
+  color: var(--pink-700);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 3px rgba(255,255,255,0.5);
+}
+@keyframes tapBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.55; }
+}
+
+/* 화면 탭 시 환영 화면 페이드 아웃 */
+#scene-welcome.tapped .tap-hint,
+#scene-welcome.tapped .welcome-text-top,
+#scene-welcome.tapped .church-stage {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  transition-delay: 0.4s;
+}
+
+/* ====================================================
+   SCENE 2 : 편지
+   ==================================================== */
+.letter-wrap {
+  perspective: 1200px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  justify-content: center;
+}
+.letter {
+  position: relative;
+  width: 88vw;
+  max-width: 360px;
+  aspect-ratio: 5 / 7;
+  background: var(--cream);
+  border-radius: 6px;
+  box-shadow:
+    0 20px 50px rgba(201, 24, 74, 0.25),
+    0 6px 15px rgba(201, 24, 74, 0.15);
+  transform: scale(1.6) rotate(6deg);
+  opacity: 0;
+  filter: blur(6px);
+  transition:
+    transform 0.95s cubic-bezier(0.25, 1, 0.4, 1),
+    opacity 0.55s ease,
+    filter 0.7s ease;
+  padding: 36px 28px;
+  overflow: hidden;
+}
+#scene-letter.active .letter {
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* 편지 모서리 접힘 효과 */
+.letter-fold-tl, .letter-fold-tr,
+.letter-fold-bl, .letter-fold-br {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, var(--pink-200) 50%, transparent 50%);
+  opacity: 0.4;
+}
+.letter-fold-tl { top: 0; left: 0; }
+.letter-fold-tr { top: 0; right: 0; transform: rotate(90deg); }
+.letter-fold-bl { bottom: 0; left: 0; transform: rotate(-90deg); }
+.letter-fold-br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+.letter-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  animation: fadeInUp 0.9s ease 0.8s forwards;
+}
+#scene-letter:not(.active) .letter-content { animation: none; opacity: 0; }
+
+.letter-date {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+  letter-spacing: 0.1em;
+}
+.letter-greeting {
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--pink-700);
+  margin-bottom: 24px;
+}
+.letter-body {
+  font-family: 'Gaegu', cursive;
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.letter-body.small {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.letter-sign {
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 20px;
+  color: var(--pink-700);
+  margin-top: 28px;
+  letter-spacing: 0.02em;
+}
+
+/* ====================================================
+   SCENE 3 : 영상
+   ==================================================== */
+#scene-video {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.video-frame {
+  width: 100%;
+  max-width: 880px;
+  background: #000;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+              0 0 0 8px rgba(255, 209, 220, 0.4);
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+.video-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+  display: block;
+}
+.video-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  background: linear-gradient(135deg, var(--pink-600), var(--pink-700));
+  text-align: center;
+  padding: 20px;
+}
+/* 핵심 수정: hidden 속성이 display:flex 에 안 먹는 문제 해결 */
+.video-fallback[hidden] {
+  display: none !important;
+}
+.video-fallback p { font-size: 18px; margin-bottom: 8px; }
+.video-fallback .sub { font-size: 14px; opacity: 0.85; }
+
+.replay-btn {
+  margin-top: 20px;
+  background: var(--cream);
+  color: var(--pink-700);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 24px;
+  font-family: 'Gaegu', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.replay-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+  animation: fadeInUp 0.5s ease;
+}
+.replay-btn:active { transform: scale(0.96); }
+
+/* ====================================================
+   공통 키프레임
+   ==================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ====================================================
+   반응형
+   ==================================================== */
+@media (min-width: 600px) {
+  .title { font-size: 26px; }
+  .letter-greeting { font-size: 38px; }
+  .letter-body { font-size: 19px; }
+}
+@media (max-height: 640px) {
+  .welcome-text-top { transform: scale(0.9); }
+  .church-stage { height: 44vh; }
+  .title { font-size: 19px; }
+}

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#FFC2D1" />
+  <title>선두교회 신혼부부회 ｜ 스승의 주일 편지</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Pen+Script&family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 배경 그라데이션 + 떨어지는 꽃잎 -->
+  <div class="sky-bg"></div>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+
+  <!-- ────────────── SCENE 1 : 환영 + 교회 + 종이비행기 ────────────── -->
+  <section id="scene-welcome" class="scene active" aria-label="환영">
+    <div class="welcome-text-top">
+      <p class="subtitle">스승의 주일을 맞이하여</p>
+      <h1 class="title">
+        선두교회 신혼부부회로부터<br />
+        <span class="highlight">편지가 도착했습니다</span>
+      </h1>
+    </div>
+
+    <div class="church-stage">
+      <!-- 잔디/언덕 -->
+      <div class="hill"></div>
+
+      <!-- 멀리 보이는 작은 산 (배경) -->
+      <svg class="far-hills" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 100 L0 60 Q40 30 80 50 Q140 20 200 45 Q260 25 320 50 Q360 35 400 55 L400 100 Z" fill="#FFD1DC" opacity="0.6"/>
+        <path d="M0 100 L0 75 Q60 55 120 70 Q180 50 240 68 Q300 55 400 70 L400 100 Z" fill="#FFC2D1" opacity="0.8"/>
+      </svg>
+
+      <!-- 교회 일러스트 (실제 선두교회 외관 기반 — 모던 벽돌 + 은빛 첨탑) -->
+      <svg class="church" viewBox="0 0 320 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="brickGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#C97B5A"/>
+            <stop offset="50%" stop-color="#B5664A"/>
+            <stop offset="100%" stop-color="#9A5240"/>
+          </linearGradient>
+          <linearGradient id="brickGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#D08866"/>
+            <stop offset="100%" stop-color="#A55D44"/>
+          </linearGradient>
+          <linearGradient id="spireGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#9DA7AE"/>
+            <stop offset="35%" stop-color="#E8ECEF"/>
+            <stop offset="55%" stop-color="#FFFFFF"/>
+            <stop offset="75%" stop-color="#C5CDD3"/>
+            <stop offset="100%" stop-color="#7E8890"/>
+          </linearGradient>
+          <linearGradient id="accentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#7DB5A8"/>
+            <stop offset="100%" stop-color="#5B8E7D"/>
+          </linearGradient>
+          <linearGradient id="windowGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FFE9C6"/>
+            <stop offset="100%" stop-color="#FFC97A"/>
+          </linearGradient>
+        </defs>
+
+        <!-- 지면 그림자 -->
+        <ellipse cx="160" cy="345" rx="135" ry="7" fill="rgba(80,40,30,0.2)"/>
+
+        <!-- ── 본관 (왼쪽 — 선교관) ── -->
+        <!-- 본관 옆 청록 액센트 판 (사진의 푸른 패널) -->
+        <rect x="40" y="170" width="20" height="170" fill="url(#accentGrad)" stroke="#3F6E60" stroke-width="0.8"/>
+
+        <!-- 본관 메인 -->
+        <rect x="60" y="160" width="120" height="180" fill="url(#brickGrad2)" stroke="#7E4530" stroke-width="1.2"/>
+
+        <!-- 본관 옥상 라인 -->
+        <rect x="58" y="156" width="124" height="6" fill="#8E5538" stroke="#5C3B26" stroke-width="0.8"/>
+
+        <!-- 본관 창문 (격자) -->
+        <g fill="url(#windowGlow)" stroke="#7E4530" stroke-width="0.6" opacity="0.92">
+          <!-- 행 1 -->
+          <rect x="68" y="172" width="14" height="18" rx="1"/>
+          <rect x="86" y="172" width="14" height="18" rx="1"/>
+          <rect x="104" y="172" width="14" height="18" rx="1"/>
+          <rect x="122" y="172" width="14" height="18" rx="1"/>
+          <rect x="140" y="172" width="14" height="18" rx="1"/>
+          <rect x="158" y="172" width="14" height="18" rx="1"/>
+          <!-- 행 2 -->
+          <rect x="68" y="200" width="14" height="18" rx="1"/>
+          <rect x="86" y="200" width="14" height="18" rx="1"/>
+          <rect x="104" y="200" width="14" height="18" rx="1"/>
+          <rect x="122" y="200" width="14" height="18" rx="1"/>
+          <rect x="140" y="200" width="14" height="18" rx="1"/>
+          <rect x="158" y="200" width="14" height="18" rx="1"/>
+          <!-- 행 3 -->
+          <rect x="68" y="228" width="14" height="18" rx="1"/>
+          <rect x="86" y="228" width="14" height="18" rx="1"/>
+          <rect x="104" y="228" width="14" height="18" rx="1"/>
+          <rect x="122" y="228" width="14" height="18" rx="1"/>
+          <rect x="140" y="228" width="14" height="18" rx="1"/>
+          <rect x="158" y="228" width="14" height="18" rx="1"/>
+          <!-- 행 4 -->
+          <rect x="68" y="256" width="14" height="18" rx="1"/>
+          <rect x="86" y="256" width="14" height="18" rx="1"/>
+          <rect x="104" y="256" width="14" height="18" rx="1"/>
+          <rect x="122" y="256" width="14" height="18" rx="1"/>
+          <rect x="140" y="256" width="14" height="18" rx="1"/>
+          <rect x="158" y="256" width="14" height="18" rx="1"/>
+        </g>
+
+        <!-- 본관 라벨 "선교관" 위치 (벽돌 띠) -->
+        <rect x="60" y="290" width="120" height="14" fill="#9A5240" opacity="0.6"/>
+
+        <!-- 본관 입구 -->
+        <rect x="100" y="306" width="40" height="34" fill="#5C3B26" stroke="#3F2818" stroke-width="0.8"/>
+        <line x1="120" y1="306" x2="120" y2="340" stroke="#3F2818" stroke-width="0.8"/>
+        <rect x="100" y="304" width="40" height="3" fill="#7E4530"/>
+
+        <!-- ── 종탑 (오른쪽 — 좁고 높은 벽돌탑) ── -->
+        <!-- 탑 본체 -->
+        <rect x="200" y="80" width="60" height="260" fill="url(#brickGrad)" stroke="#7E4530" stroke-width="1.4"/>
+
+        <!-- 탑 측면 그림자 (입체감) -->
+        <rect x="250" y="80" width="10" height="260" fill="#7E4530" opacity="0.25"/>
+
+        <!-- 탑 상단 마감 라인 -->
+        <rect x="198" y="76" width="64" height="6" fill="#8E5538" stroke="#5C3B26" stroke-width="0.8"/>
+
+        <!-- "선두교회" 세로 한글 (흰색) -->
+        <g fill="#FFFFFF" font-family="'Nanum Myeongjo', serif" font-size="13" font-weight="700" text-anchor="middle">
+          <text x="230" y="115">선</text>
+          <text x="230" y="135">두</text>
+          <text x="230" y="155">교</text>
+          <text x="230" y="175">회</text>
+        </g>
+
+        <!-- 탑 하단 창문 띠 (위에서 아래로 작은 슬릿) -->
+        <g fill="url(#windowGlow)" stroke="#7E4530" stroke-width="0.5" opacity="0.85">
+          <rect x="218" y="200" width="24" height="6" rx="1"/>
+          <rect x="218" y="212" width="24" height="6" rx="1"/>
+          <rect x="218" y="224" width="24" height="6" rx="1"/>
+          <rect x="218" y="248" width="24" height="6" rx="1"/>
+          <rect x="218" y="260" width="24" height="6" rx="1"/>
+          <rect x="218" y="272" width="24" height="6" rx="1"/>
+        </g>
+
+        <!-- 탑 입구 -->
+        <rect x="215" y="306" width="30" height="34" fill="#3F2818" stroke="#241008" stroke-width="0.8"/>
+        <line x1="230" y1="306" x2="230" y2="340" stroke="#241008" stroke-width="0.6"/>
+        <!-- 입구 표지판 -->
+        <rect x="216" y="324" width="28" height="6" fill="#5C8FA8" opacity="0.7"/>
+
+        <!-- ── 은빛 금속 첨탑 ── -->
+        <!-- 첨탑 베이스 (사다리꼴) -->
+        <polygon points="200,76 260,76 252,40 208,40" fill="url(#spireGrad)" stroke="#6E7880" stroke-width="0.8" stroke-linejoin="round"/>
+        <!-- 첨탑 상단 (긴 삼각형 — 위로 갈수록 좁아짐) -->
+        <polygon points="208,40 252,40 230,-8" fill="url(#spireGrad)" stroke="#6E7880" stroke-width="0.8" stroke-linejoin="round"/>
+        <!-- 첨탑 중심 라인 (이음새 표현) -->
+        <line x1="230" y1="-8" x2="230" y2="76" stroke="#6E7880" stroke-width="0.4" opacity="0.5"/>
+        <!-- 첨탑 하이라이트 -->
+        <line x1="221" y1="-5" x2="215" y2="40" stroke="#FFFFFF" stroke-width="0.7" opacity="0.7"/>
+        <line x1="215" y1="40" x2="208" y2="76" stroke="#FFFFFF" stroke-width="0.7" opacity="0.5"/>
+
+        <!-- 첨탑 측면 작은 십자가 (사진의 횡 십자가) -->
+        <line x1="252" y1="30" x2="268" y2="30" stroke="#E8ECEF" stroke-width="2" stroke-linecap="round"/>
+        <line x1="260" y1="22" x2="260" y2="38" stroke="#E8ECEF" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- 최상단 십자가 -->
+        <line x1="230" y1="-8" x2="230" y2="-30" stroke="#E8ECEF" stroke-width="2.4" stroke-linecap="round"/>
+        <line x1="222" y1="-22" x2="238" y2="-22" stroke="#E8ECEF" stroke-width="2.4" stroke-linecap="round"/>
+        <!-- 십자가 빛 -->
+        <circle cx="230" cy="-22" r="2.2" fill="#FFFAA0" opacity="0.9">
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- 벽돌 텍스처 (가로 라인 — 본관) -->
+        <g stroke="#7E4530" stroke-width="0.35" opacity="0.35">
+          <line x1="60" y1="195" x2="180" y2="195"/>
+          <line x1="60" y1="223" x2="180" y2="223"/>
+          <line x1="60" y1="251" x2="180" y2="251"/>
+          <line x1="60" y1="279" x2="180" y2="279"/>
+        </g>
+        <!-- 벽돌 텍스처 (탑) -->
+        <g stroke="#5C3B26" stroke-width="0.35" opacity="0.4">
+          <line x1="200" y1="100" x2="260" y2="100"/>
+          <line x1="200" y1="140" x2="260" y2="140"/>
+          <line x1="200" y1="190" x2="260" y2="190"/>
+          <line x1="200" y1="240" x2="260" y2="240"/>
+          <line x1="200" y1="290" x2="260" y2="290"/>
+        </g>
+
+        <!-- 좌측 작은 벚꽃 나무 -->
+        <ellipse cx="18" cy="325" rx="4" ry="16" fill="#8B5A6B"/>
+        <circle cx="18" cy="305" r="14" fill="#FFD1DC"/>
+        <circle cx="9" cy="310" r="9" fill="#FFC2D1"/>
+        <circle cx="27" cy="310" r="9" fill="#FFC2D1"/>
+        <circle cx="18" cy="298" r="9" fill="#FFB3C6"/>
+
+        <!-- 우측 작은 벚꽃 나무 -->
+        <ellipse cx="302" cy="325" rx="4" ry="16" fill="#8B5A6B"/>
+        <circle cx="302" cy="305" r="14" fill="#FFD1DC"/>
+        <circle cx="293" cy="310" r="9" fill="#FFC2D1"/>
+        <circle cx="311" cy="310" r="9" fill="#FFC2D1"/>
+        <circle cx="302" cy="298" r="9" fill="#FFB3C6"/>
+      </svg>
+    </div>
+
+    <div class="tap-hint" id="tapHint">
+      <div class="tap-icon">✉️</div>
+      <p>화면을 살짝 눌러주세요</p>
+    </div>
+  </section>
+
+  <!-- ────────────── SCENE 2 : 펼쳐지는 편지 ────────────── -->
+  <section id="scene-letter" class="scene" aria-label="편지">
+    <div class="letter-wrap">
+      <div class="letter" id="letter">
+        <div class="letter-fold-tl"></div>
+        <div class="letter-fold-tr"></div>
+        <div class="letter-fold-bl"></div>
+        <div class="letter-fold-br"></div>
+
+        <div class="letter-content">
+          <p class="letter-date">2026. 스승의 주일</p>
+          <h2 class="letter-greeting">사랑하는 목사님께</h2>
+          <p class="letter-body">
+            늘 따뜻한 말씀과 사랑으로<br />
+            저희 신혼부부들의 가정을 돌보아주시는<br />
+            목사님께 깊은 감사를 드립니다.
+          </p>
+          <p class="letter-body small">
+            저희의 마음을 담은 영상 편지를 전합니다.
+          </p>
+          <p class="letter-sign">— 선두교회 신혼부부회 드림</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────── SCENE 3 : 영상 편지 ────────────── -->
+  <section id="scene-video" class="scene" aria-label="영상 편지">
+    <div class="video-frame">
+      <video id="letterVideo" playsinline preload="auto" controls>
+        <source src="video/letter.mp4?v=720p2" type="video/mp4" />
+        영상을 재생할 수 없습니다.
+      </video>
+      <div class="video-fallback" id="videoFallback" hidden>
+        <p>📹 영상 파일을 찾을 수 없어요.</p>
+        <p class="sub">video/letter.mp4 파일을 폴더에 넣어주세요.</p>
+      </div>
+    </div>
+    <button id="replayBtn" class="replay-btn" type="button">처음부터 다시 보기 ↺</button>
+  </section>
+
+  <!-- ────────────── 편지 봉투 (viewport 전체에서 날아옴) ────────────── -->
+  <svg class="airplane" id="airplane" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="envBody" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF" />
+        <stop offset="100%" stop-color="#FFF1E5" />
+      </linearGradient>
+      <linearGradient id="envFlap" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FFE5EC" />
+        <stop offset="100%" stop-color="#FFC2D1" />
+      </linearGradient>
+      <radialGradient id="sealGrad" cx="40%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="#FF8FA3" />
+        <stop offset="60%" stop-color="#FB6F92" />
+        <stop offset="100%" stop-color="#C9184A" />
+      </radialGradient>
+    </defs>
+
+    <!-- 봉투 본체 (직사각형) -->
+    <rect x="8" y="22" width="104" height="68" rx="3" fill="url(#envBody)" stroke="#C9184A" stroke-width="1.6"/>
+
+    <!-- 봉투 뒷면 접힘 선 (X 모양) -->
+    <line x1="8" y1="22" x2="60" y2="56" stroke="#C9184A" stroke-width="0.9" opacity="0.4"/>
+    <line x1="112" y1="22" x2="60" y2="56" stroke="#C9184A" stroke-width="0.9" opacity="0.4"/>
+    <line x1="8" y1="90" x2="60" y2="56" stroke="#C9184A" stroke-width="0.9" opacity="0.3"/>
+    <line x1="112" y1="90" x2="60" y2="56" stroke="#C9184A" stroke-width="0.9" opacity="0.3"/>
+
+    <!-- 윗쪽 플랩 (V 모양) -->
+    <polygon points="8,22 60,56 112,22" fill="url(#envFlap)" stroke="#C9184A" stroke-width="1.6" stroke-linejoin="round"/>
+    <!-- 플랩 하이라이트 -->
+    <line x1="14" y1="24" x2="58" y2="52" stroke="#FFFFFF" stroke-width="0.8" opacity="0.7"/>
+
+    <!-- 하트 모양 실링 왁스 -->
+    <g transform="translate(60, 60)">
+      <path d="M 0,6 C -8,-2 -16,-2 -16,5 C -16,13 0,22 0,22 C 0,22 16,13 16,5 C 16,-2 8,-2 0,6 Z"
+            fill="url(#sealGrad)" stroke="#8B0030" stroke-width="0.9"/>
+      <!-- 왁스 하이라이트 -->
+      <ellipse cx="-5" cy="3" rx="3" ry="2" fill="#FFC2D1" opacity="0.65"/>
+      <!-- 작은 십자 (교회 편지) -->
+      <line x1="0" y1="6" x2="0" y2="14" stroke="#FFE9C6" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/>
+      <line x1="-3" y1="10" x2="3" y2="10" stroke="#FFE9C6" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/>
+    </g>
+
+    <!-- 살짝 삐져나온 편지지 (윗쪽) -->
+    <rect x="22" y="20" width="76" height="3" fill="#FFFCF8" stroke="#C9184A" stroke-width="0.5" opacity="0.9"/>
+  </svg>
+
+  <script src="script.js"></script>
+</body>
+</html>

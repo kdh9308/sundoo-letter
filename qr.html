@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📱 모바일 QR — 선두교회 신혼부부회</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink-100: #FFE5EC;
+      --pink-300: #FFC2D1;
+      --pink-600: #FB6F92;
+      --pink-700: #C9184A;
+      --cream: #FFF9F5;
+      --ink: #5B2A3A;
+      --ink-soft: #8B5A6B;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--ink);
+      background: linear-gradient(135deg, #FFF5F8 0%, #FFE5EC 40%, #FFD1DC 80%, #FFC2D1 100%);
+      overflow: hidden;
+    }
+    .wrap {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      gap: 18px;
+    }
+    h1 {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 26px;
+      color: var(--pink-700);
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-family: 'Gaegu', cursive;
+      font-size: 19px;
+      color: var(--ink);
+      text-align: center;
+      line-height: 1.6;
+      max-width: 540px;
+    }
+    .qr-card {
+      background: var(--cream);
+      padding: 28px;
+      border-radius: 24px;
+      box-shadow:
+        0 20px 50px rgba(201, 24, 74, 0.18),
+        0 0 0 6px rgba(255, 209, 220, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .qr-box {
+      width: 320px;
+      height: 320px;
+      background: #fff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .qr-box img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .qr-box .loading {
+      color: var(--ink-soft);
+      font-family: 'Gaegu', cursive;
+      font-size: 18px;
+    }
+    .url-text {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--pink-700);
+      background: var(--pink-100);
+      padding: 8px 16px;
+      border-radius: 8px;
+      letter-spacing: 0.02em;
+      user-select: all;
+      cursor: text;
+    }
+    .hint {
+      font-size: 13px;
+      color: var(--ink-soft);
+      text-align: center;
+      line-height: 1.6;
+      max-width: 460px;
+    }
+    .hint b { color: var(--pink-700); }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      background: var(--cream);
+      color: var(--pink-700);
+      border: 2px solid var(--pink-300);
+      padding: 10px 22px;
+      border-radius: 22px;
+      font-family: 'Gaegu', cursive;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s, background 0.2s;
+    }
+    .btn:hover { background: var(--pink-100); transform: translateY(-2px); }
+    .btn.primary {
+      background: var(--pink-600);
+      color: var(--cream);
+      border-color: var(--pink-700);
+    }
+    .btn.primary:hover { background: var(--pink-700); }
+    .copy-feedback {
+      font-family: 'Gaegu', cursive;
+      font-size: 14px;
+      color: var(--pink-600);
+      height: 18px;
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 22px; }
+      .qr-box { width: 260px; height: 260px; }
+      .qr-card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>📱 모바일로 영상 편지 받기</h1>
+    <p class="subtitle">
+      목사님께서 스마트폰 카메라로 아래 QR 을 스캔하시면<br />
+      편지 사이트가 폰에서 열립니다.
+    </p>
+
+    <div class="qr-card">
+      <div class="qr-box" id="qrBox">
+        <div class="loading">QR 생성 중…</div>
+      </div>
+      <div class="url-text" id="urlText">로딩 중…</div>
+      <div class="copy-feedback" id="copyFeedback">&nbsp;</div>
+    </div>
+
+    <p class="hint" id="hintText">
+      ※ 폰이 PC 와 <b>같은 WiFi</b> 에 연결되어 있어야 합니다.<br />
+      QR 이 안 떠도 위 주소를 폰 브라우저에 직접 입력해도 됩니다.
+    </p>
+
+    <div class="btn-row">
+      <button class="btn" id="copyBtn">🔗 주소 복사</button>
+      <a class="btn primary" href="/">📺 PC에서 미리보기 →</a>
+    </div>
+  </div>
+
+  <script>
+    const qrBox = document.getElementById('qrBox');
+    const urlText = document.getElementById('urlText');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyFeedback = document.getElementById('copyFeedback');
+
+    const hintText = document.getElementById('hintText');
+    let lanUrl = '';
+
+    // ── 두 모드 자동 감지 ─────────────────────────
+    //   1) 로컬 Python 서버: /_lan_info 응답함 → LAN IP 주소로 QR
+    //   2) GitHub Pages 등 정적 호스팅: /_lan_info 404 → 현재 URL 자체로 QR
+    async function resolveShareUrl() {
+      try {
+        const r = await fetch('/_lan_info', { cache: 'no-store' });
+        if (r.ok) {
+          const d = await r.json();
+          return { url: d.lan_url, mode: 'lan' };
+        }
+      } catch (e) { /* 정적 호스팅이면 여기로 빠짐 */ }
+      // 정적 호스팅: qr.html 의 부모 경로를 공유 URL 로 사용
+      const u = new URL(window.location.href);
+      u.pathname = u.pathname.replace(/qr\.html$/i, '');
+      u.search = '';
+      u.hash = '';
+      return { url: u.toString(), mode: 'public' };
+    }
+
+    resolveShareUrl()
+      .then(({ url, mode }) => {
+        lanUrl = url;
+        urlText.textContent = url;
+        if (mode === 'public') {
+          hintText.innerHTML = '※ 인터넷 연결만 있으면 어디서든 접속 가능합니다.<br />QR 이 안 떠도 위 주소를 폰 브라우저에 직접 입력해도 돼요.';
+        }
+        const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=8&color=C9184A&bgcolor=FFFFFF&data=${encodeURIComponent(url)}`;
+        const img = new Image();
+        img.alt = 'QR Code';
+        img.onload = () => { qrBox.innerHTML = ''; qrBox.appendChild(img); };
+        img.onerror = () => {
+          qrBox.innerHTML = `
+            <div style="text-align:center;padding:24px;color:#8B5A6B;font-family:Gaegu,cursive;">
+              ⚠️ QR 이미지를 불러오지 못했어요.<br/>
+              아래 주소를 폰에 직접 입력해주세요.
+            </div>`;
+        };
+        img.src = qrSrc;
+      })
+      .catch(err => {
+        urlText.textContent = '주소를 가져오지 못했어요.';
+        console.error(err);
+      });
+
+    copyBtn.addEventListener('click', async () => {
+      if (!lanUrl) return;
+      try {
+        await navigator.clipboard.writeText(lanUrl);
+        copyFeedback.textContent = '✓ 복사 완료!';
+      } catch (e) {
+        copyFeedback.textContent = '복사 실패 — 주소를 길게 눌러 직접 복사해주세요.';
+      }
+      setTimeout(() => { copyFeedback.innerHTML = '&nbsp;'; }, 2200);
+    });
+  </script>
+</body>
+</html>
