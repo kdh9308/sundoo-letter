@@ -55,7 +55,7 @@ body { position: relative; }
         rgba(255, 245, 248, 0.22) 0%,
         rgba(255, 229, 236, 0.32) 40%,
         rgba(255, 194, 209, 0.55) 100%),
-      url('images/church-bg.png') 78% 40% / cover no-repeat;
+      url('images/church-bg.png') 90% 30% / cover no-repeat;
   }
 }
 
